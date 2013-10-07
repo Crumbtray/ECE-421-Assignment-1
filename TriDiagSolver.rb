@@ -3,6 +3,17 @@ require 'test/unit/assertions.rb'
 include Test::Unit::Assertions
 
 class TriDiagSolver < AbstractSolver
+	def initialize(sparseMatrix)
+	  #PRE
+      begin
+        raise "TriDiagSolver:: runtime error -> SparseMatrix argument must be an SparseMatrix" unless sparseMatrix.is_a?(SparseMatrix)
+      end
+	  #PRE end
+	  
+	  #POST
+      #POST end
+	end
+	
 	def self.solve(b)
 	  #PRE
       begin
