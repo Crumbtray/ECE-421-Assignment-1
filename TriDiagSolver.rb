@@ -26,11 +26,11 @@ class TriDiagSolver < AbstractSolver
 	  
 	  #POST
 	  begin
-		raise "TriDiagSolver:: runtime error -> vector b must not be modified" unless (copyOfB == b)
+		raise "TriDiagSolver:: runtime error -> vector b must not be modified" unless (copyOfB.equals(b))
 	  end
 	  
 	  begin
-		raise "TriDiagSolver:: runtime error -> SparseMatrix A must not be modified" unless (copyOfA == A)
+		raise "TriDiagSolver:: runtime error -> SparseMatrix A must not be modified" unless (copyOfA.equals(A))
 	  end
 	  
 	  begin

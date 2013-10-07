@@ -26,11 +26,11 @@ class LUSparseSolver < AbstractSolver
 	  
 	  #POST
 	  begin
-		raise "LUSparseSolver:: runtime error -> vector b must not be modified" unless (copyOfB == b)
+		raise "LUSparseSolver:: runtime error -> vector b must not be modified" unless (copyOfB.equals(B))
 	  end
 	  
 	  begin
-		raise "LUSparseSolver:: runtime error -> SparseMatrix A must not be modified" unless (copyOfA == A)
+		raise "LUSparseSolver:: runtime error -> SparseMatrix A must not be modified" unless (copyOfA.equals(A))
 	  end
 	  
 	  begin
