@@ -11,6 +11,8 @@ class SparseMatrix
         begin
             raise "SparseMatrix:: runtime error -> .new() matrix argument must be a Matrix" unless matrix.kind_of?(Matrix)
         end
+        
+        invariant
         #PRE end
 
         #POST
@@ -33,6 +35,8 @@ class SparseMatrix
         begin
             raise "SparseMatrix:: runtime error -> invalid size" unless @columnCount.is_a?(Integer) and @columnCount >= 0
         end
+        
+        invariant
         #POST end
 
     end
@@ -50,29 +54,34 @@ class SparseMatrix
         begin
             raise "SparseMatrix:: runtime error -> .AddNewValue() row argument must be an Integer" unless row.kind_of?(Integer)
         end
+        
+        invariant
         #PRE end
         
         
         #POST
-            assert(@values.include(value), "Value was not inserted.")
-            assert(@rows.include(row), "Row was not inserted.")
-            assert(@columns.include(col), "Column was not inserted." )
+        assert(@values.include(value), "Value was not inserted.")
+        assert(@rows.include(row), "Row was not inserted.")
+        assert(@columns.include(col), "Column was not inserted." )
+        invariant
         #POST end
     end
     
     def GetRowCount
         #PRE
+        invariant
             # no change
         #PRE end
         
         #POST
+        invariant
             # no change
         #POST end
     end
     
     def to_s 
         #POST
-            # no change
+        invariant
         #POST end
     end
     
@@ -81,19 +90,20 @@ class SparseMatrix
         begin
             raise "SparseMatrix:: runtime error -> .new() matrix argument must be a Matrix" unless sm.kind_of?(SparseMatrix)
         end
+        invariant
         #PRE end
         
         #POST
-            # no change
+        invariant
         #POST end
     end
 
-    # Invariants
-    @rows.each{|x| assert(x <= rowCount)}
-    @columns.each{|x| assert(x <= columnCount)}
-    @rows.length > 0
-    @coluumns.length > 0
-    @values.length > 0    
-    # Invariants end
+    def invariant
+       @rows.each{|x| assert(x <= rowCount, "Invalid row value.")}
+       @columns.each{|x| assert(x <= columnCount, "Invalid column value.")}
+       assert(@rows.length >= 0, "Cannot have negative rows.")
+       assert(@coluumns.length >= 0, "Cannot have negative columns.")
+       assert(@values.length >= 0, "Cannot have less than 0 values.")   
+    end
     
 end
