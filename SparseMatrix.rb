@@ -4,7 +4,7 @@ require 'matrix'
 include Test::Unit::Assertions
 
 class SparseMatrix
-
+        
     def initialize(matrix)
 
         #PRE
@@ -88,4 +88,12 @@ class SparseMatrix
         #POST end
     end
 
+    # Invariants
+    @rows.each{|x| assert(x <= rowCount)}
+    @columns.each{|x| assert(x <= columnCount)}
+    @rows.length > 0
+    @coluumns.length > 0
+    @values.length > 0    
+    # Invariants end
+    
 end
