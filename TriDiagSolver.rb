@@ -9,7 +9,7 @@ class TriDiagSolver < AbstractSolver
         raise "TriDiagSolver:: runtime error -> b argument must be an Array" unless b.is_a?(Array)
       end
 	  begin
-        raise "TriDiagSolver:: runtime error -> b argument must have a size that is equal to the number of rows in A" unless (b.size == A.rowCount)
+        raise "TriDiagSolver:: runtime error -> b argument must have a size that is equal to the number of rows in A" unless (b.size == A.GetRowCount())
       end
       #PRE end
 	  
