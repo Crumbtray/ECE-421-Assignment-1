@@ -58,6 +58,16 @@ class SparseMatrix
         #POST end
     end
     
+    def GetRowCount
+        #PRE
+        
+        #PRE end
+        
+        #POST
+        
+        #POST end
+    end
+    
     def to_s 
         #POST
         
