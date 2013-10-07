@@ -27,7 +27,11 @@ class SparseMatrix
         end
 	  
         begin
-            raise "SparseMatrix:: runtime error -> invalid size" unless @size.is_a?(Integer) and @size >= 0
+            raise "SparseMatrix:: runtime error -> invalid size" unless @rowCount.is_a?(Integer) and @rowCount >= 0
+        end
+        
+        begin
+            raise "SparseMatrix:: runtime error -> invalid size" unless @columnCount.is_a?(Integer) and @columnCount >= 0
         end
         #POST end
 
