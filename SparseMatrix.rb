@@ -21,11 +21,11 @@ class SparseMatrix
         raise "SparseMatrix:: runtime error -> .new() value_column must be an array" unless @value_column.kind_of?(Array)
       end
 	  
-	  begin
+      begin
         raise "SparseMatrix:: runtime error -> ,new() value_row must be an array" unless @value_row.kind_of?(Array)
       end
 	  
-	  begin
+      begin
         raise "SparseMatrix:: runtime error -> invalid size" unless @size.is_a?(Integer) and @size >= 0
       end
       #POST end
