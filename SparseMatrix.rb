@@ -8,25 +8,25 @@ class SparseMatrix
 
       #PRE
       begin
-        raise "Rray:: runtime error -> .new() values argument must be array" unless values.kind_of?(Matrix)
+        raise "SparseMatrix:: runtime error -> .new() matrix argument must be a Matrix" unless matrix.kind_of?(Matrix)
       end
       #PRE end
 
       #POST
       begin
-        raise "Rray:: runtime error -> .new() inner_indices must be array" unless values.kind_of?(Array)
+        raise "SparseMatrix:: runtime error -> .new() values must be an array" unless values.kind_of?(Array)
       end
 	  
       begin
-        raise "Rray:: runtime error -> .new() inner_indices must be array" unless value_column.kind_of?(Array)
+        raise "SparseMatrix:: runtime error -> .new() value_column must be an array" unless value_column.kind_of?(Array)
       end
 	  
 	  begin
-        raise "Rray:: runtime error -> .new() inner_indices must be array" unless value_row.kind_of?(Array)
+        raise "SparseMatrix:: runtime error -> ,new() value_row must be an array" unless value_row.kind_of?(Array)
       end
 	  
 	  begin
-        raise "Rray:: runtime error -> .new() inner_indices must be array" unless size.is_a?(Integer)
+        raise "SparseMatrix:: runtime error -> invalid size" unless size.is_a?(Integer) and size >= 0
       end
       #POST end
 
