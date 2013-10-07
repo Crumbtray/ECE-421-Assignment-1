@@ -6,7 +6,7 @@ class TriDiagSolver < AbstractSolver
 	def initialize(sparseMatrix)
 	  #PRE
       begin
-        raise "TriDiagSolver:: runtime error -> SparseMatrix argument must be an SparseMatrix" unless sparseMatrix.is_a?(SparseMatrix)
+        raise "TriDiagSolver:: runtime error -> sparseMatrix argument must be a SparseMatrix" unless sparseMatrix.is_a?(SparseMatrix)
       end
 	  #PRE end
 	  
@@ -25,6 +25,17 @@ class TriDiagSolver < AbstractSolver
       #PRE end
 	  
 	  #POST
+	  begin
+		raise "TriDiagSolver:: runtime error -> vector b must not be modified" unless (copyOfB == b)
+	  end
+	  
+	  begin
+		raise "TriDiagSolver:: runtime error -> SparseMatrix A must not be modified" unless (copyOfA == A)
+	  end
+	  
+	  begin
+		raise "TriDiagSolver:: runtime error -> solution vector x must be equal to the solution of SparseMatrix A" unless (A*x == b)
+	  end
       #POST end
 	end
 end
