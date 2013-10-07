@@ -57,5 +57,19 @@ class SparseMatrix
         
         #POST end
     end
+    
+    def to_s 
+        #POST
+        
+        #POST end
+    end
+    
+    def equals
+        #PRE
+        #PRE end
+        
+        #POST 
+        #POST end
+    end
 
 end
