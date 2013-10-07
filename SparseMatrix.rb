@@ -12,11 +12,6 @@ class SparseMatrix
       end
       #PRE end
 
-      #@values = values
-      #@value_column = value_column
-      #@value_row = value_row
-      #@size = size
-
       #POST
       begin
         raise "Rray:: runtime error -> .new() inner_indices must be array" unless values.kind_of?(Array)
