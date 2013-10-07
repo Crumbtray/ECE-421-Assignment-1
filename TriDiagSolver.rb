@@ -6,7 +6,7 @@ class TriDiagSolver < AbstractSolver
 	def initialize(sparseMatrix)
 	  #PRE
       begin
-        raise "TriDiagSolver:: runtime error -> sparseMatrix argument must be a SparseMatrix" unless sparseMatrix.is_a?(SparseMatrix)
+        raise "TriDiagSolver:: runtime error -> sparseMatrix argument must be a SparseMatrix" unless sparseMatrix.kind_of?(SparseMatrix)
       end
 	  #PRE end
 	  
@@ -17,7 +17,7 @@ class TriDiagSolver < AbstractSolver
 	def self.solve(b)
 	  #PRE
       begin
-        raise "TriDiagSolver:: runtime error -> b argument must be an Array" unless b.is_a?(Array)
+        raise "TriDiagSolver:: runtime error -> b argument must be an Array" unless b.kind_of?(Array)
       end
 	  begin
         raise "TriDiagSolver:: runtime error -> b argument must have a size that is equal to the number of rows in A" unless (b.size == A.GetRowCount())
