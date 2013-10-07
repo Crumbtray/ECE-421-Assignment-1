@@ -50,35 +50,37 @@ class SparseMatrix
         
         
         #POST
-        
-        assert(@values.include(value), "Value was not inserted.")
-        assert(@rows.include(row), "Row was not inserted.")
-        assert(@columns.include(col), "Column was not inserted." )
-        
+            assert(@values.include(value), "Value was not inserted.")
+            assert(@rows.include(row), "Row was not inserted.")
+            assert(@columns.include(col), "Column was not inserted." )
         #POST end
     end
     
     def GetRowCount
         #PRE
-        
+            # no change
         #PRE end
         
         #POST
-        
+            # no change
         #POST end
     end
     
     def to_s 
         #POST
-        
+            # no change
         #POST end
     end
     
-    def equals
+    def equals(sm)
         #PRE
+        begin
+            raise "SparseMatrix:: runtime error -> .new() matrix argument must be a Matrix" unless sm.kind_of?(SparseMatrix)
+        end
         #PRE end
         
-        #POST 
+        #POST
+            # no change
         #POST end
     end
 
