@@ -1,7 +1,7 @@
 require 'simplecov'
 SimpleCov.start
 require 'test/unit'
-require './SparseMatrix'
+require './sparse_matrix'
 
 class SparseMatrixTest < Test::Unit::TestCase
   def test_constructor
