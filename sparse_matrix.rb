@@ -1,12 +1,13 @@
 #!/usr/bin/env ruby
 require 'test/unit/assertions.rb'
 require 'matrix'
+require './matrix_element'
 include Test::Unit::Assertions
 
 class SparseMatrix
     
     #Properties can be read, but not written to.
-    attr_reader :values, :rows, :columns, :rowCount, :columnCount
+    attr_reader :elements, :rowCount, :columnCount
     
     def initialize(matrix)
 
@@ -16,34 +17,22 @@ class SparseMatrix
         end
         #PRE end
         
-        @values = Array.new
-        @rows = Array.new
-        @columns = Array.new
+        @elements = Array.new
         @rowCount = matrix.row_size
         @columnCount = matrix.column_size
 
-        
         matrix.each_with_index do |e, row, col|
-            if(e != 0)
-                @values.push(e)
-                @rows.push(row)
-                @columns.push(col)
-            end
+          if(e != 0)
+            element = MatrixElement.new(e, row, col)
+            @elements.push(element)
+          end
         end
         
         #POST
         begin
-            raise "SparseMatrix:: runtime error -> .new() values must be an array" unless @values.kind_of?(Array)
+            raise "SparseMatrix:: runtime error -> .new() values must be an array" unless @elements.kind_of?(Array)
         end
-	  
-        begin
-            raise "SparseMatrix:: runtime error -> .new() value_column must be an array" unless @rows.kind_of?(Array)
-        end
-	  
-        begin
-            raise "SparseMatrix:: runtime error -> ,new() value_row must be an array" unless @columns.kind_of?(Array)
-        end
-	  
+
         begin
             raise "SparseMatrix:: runtime error -> invalid size" unless @rowCount.is_a?(Integer) and @rowCount >= 0
         end
@@ -86,29 +75,20 @@ class SparseMatrix
         #PRE end
         
         # TODO: Modify the code to insert in order.  Right now we insert to the end.
-        @values.push(value)
-        @columns.push(col)
-        @rows.push(row)
+        element = MatrixElement.new(value, row, col)
+        @elements.push(element) 
+        @elements.sort! do |a,b|
+          comp = (a.row <=> b.row)
+          comp.zero? ? (a.col <=> b.col) : comp
+        end
         
         #POST
-        assert(@values.include?(value), "Value was not inserted.")
-        assert(@rows.include?(row), "Row was not inserted.")
-        assert(@columns.include?(col), "Column was not inserted." )
+        assert(@elements.include?(element), "Element was not inserted.")
         invariant
         #POST end
     end
     
-    def to_s 
-        puts "Sparse Matrix Non-Zero Valuese:"
-        for i in 0..@values.length - 1
-            puts "#{@values[i]} at #{@rows[i]}, #{@columns[i]}"
-        end
-        #POST
-        invariant
-        #POST end
-    end
-    
-    def equals(sm)
+    def ==(sm)
         #PRE
         begin
             raise ArgumentError, "SparseMatrix:: argument error -> .new() matrix argument must be a Matrix" unless sm.kind_of?(SparseMatrix)
@@ -116,40 +96,24 @@ class SparseMatrix
         invariant
         #PRE end
         
-        if(@rowCount != sm.rowCount)
-            puts "RowCount not the same."
-            return false
-        end
-        
-        if(@columnCount != sm.columnCount)
-            puts "ColumnCount not the same."
-            return false
-        end
-        
-        if(!@values.eql? sm.values)
-            puts "Values Array not the same."
-            return false
-        end
-        
-        if(!@rows.eql? sm.rows)
-            puts "Row Array not the same."
-            return false
-        end
-        
-        if(!@columns.eql? sm.columns)
-            puts "Columns Array not the same"
-            return false
-        end
-        
-        return true
+        @columnCount == sm.columnCount &&
+        @rowCount == sm.rowCount &&
+        @elements == sm.elements
+    end
+
+    def eql?(sm)
+      self == sm
+    end
+
+    def hash
+      @columnCount.hash ^ @rowCount.hash ^ @elements.hash
     end
 
     def invariant
-       @rows.each{|x| assert(x <= @rowCount, "Invalid row value.")}
-       @columns.each{|x| assert(x <= @columnCount, "Invalid column value.")}
-       assert(@rows.length >= 0, "Cannot have negative rows.")
-       assert(@columns.length >= 0, "Cannot have negative columns.")
-       assert(@values.length >= 0, "Cannot have less than 0 values.")   
+       assert(@elements.length >= 0, "Cannot have negative elements.")
+       @elements.each {|x|
+         assert(x.row < rowCount, "Invalid row for element #{x}")
+         }
     end
     
 end
