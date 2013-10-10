@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 require 'test/unit/assertions.rb'
-require 'matrix'
 include Test::Unit::Assertions
 
 class MatrixElement
