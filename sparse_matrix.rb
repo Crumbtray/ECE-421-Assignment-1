@@ -74,7 +74,6 @@ class SparseMatrix
         invariant
         #PRE end
         
-        # TODO: Modify the code to insert in order.  Right now we insert to the end.
         element = MatrixElement.new(value, row, col)
         @elements.push(element) 
         @elements.sort! do |a,b|
