@@ -57,7 +57,7 @@ class SparseMatrix
 
     end
     
-    def AddNewValue(value, col, row)
+    def AddNewValue(value, row, col)
         #PRE
         begin
             raise ArgumentError, "SparseMatrix:: argument error -> .AddNewValue() value argument must be an Integer" unless value.kind_of?(Integer)
@@ -85,6 +85,7 @@ class SparseMatrix
         invariant
         #PRE end
         
+        # TODO: Modify the code to insert in order.  Right now we insert to the end.
         @values.push(value)
         @columns.push(col)
         @rows.push(row)

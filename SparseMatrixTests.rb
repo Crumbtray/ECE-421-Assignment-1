@@ -1,5 +1,7 @@
+require 'simplecov'
+SimpleCov.start
 require 'test/unit'
-load "SparseMatrix.rb"
+require './SparseMatrix'
 
 class SparseMatrixTest < Test::Unit::TestCase
   def test_constructor
@@ -16,5 +18,14 @@ class SparseMatrixTest < Test::Unit::TestCase
     assert_raise ArgumentError do
       sm = SparseMatrix.new(m)
     end   
+  end
+  
+  def test_add_value
+    m = Matrix[[0,1],[0,1]]
+    sm = SparseMatrix.new(m)
+    sm.AddNewValue(1,1,0)
+    assert_equal(1, sm.values[2])
+    assert_equal(1, sm.rows[2])
+    assert_equal(0, sm.columns[2])
   end
 end
