@@ -45,7 +45,11 @@ class SparseMatrix
 
     end
     
-    # Adds a new value to the 
+    # Adds a new element to the sparse matrix.  Cannot overwrite an existing element.
+    # 
+    # @param value [Integer] The value of the new element.
+    # @param row [Integer] The row of the new element.
+    # @param col [Integer] The column of the new element.
     def AddNewValue(value, row, col)
         #PRE
         begin
