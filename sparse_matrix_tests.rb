@@ -38,7 +38,7 @@ class SparseMatrixTest < Test::Unit::TestCase
     m = Matrix[[0,0],[0,1]]
     sm = SparseMatrix.new(m)
     assert_raise ArgumentError do
-      sm.AddNewValue(0, 1, 1)
+      sm.AddNewValue(0, 0, 0)
     end
     
     assert_raise ArgumentError do
@@ -47,6 +47,10 @@ class SparseMatrixTest < Test::Unit::TestCase
     
     assert_raise ArgumentError do
       sm.AddNewValue(1, 1, 3)
+    end
+    
+    assert_raise ArgumentError do
+      sm.AddNewValue(1, 1, 1)
     end
   end
   

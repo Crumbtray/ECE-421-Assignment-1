@@ -10,7 +10,6 @@ class SparseMatrix
     attr_reader :elements, :rowCount, :columnCount
     
     def initialize(matrix)
-
         #PRE
         begin
             raise ArgumentError, "SparseMatrix:: argument error -> .new() matrix argument must be a Matrix" unless matrix.kind_of?(Matrix)
@@ -46,6 +45,7 @@ class SparseMatrix
 
     end
     
+    # Adds a new value to the 
     def AddNewValue(value, row, col)
         #PRE
         begin
@@ -70,6 +70,10 @@ class SparseMatrix
         
         begin
             raise ArgumentError, "SparseMatrix:: argument error -> AddNewValue() value argument must not be zero" unless value != 0
+        end
+        
+        begin
+          raise ArgumentError, "SparseMatrix:: argument error -> AddNewValue() must not overwrite existing elements" unless @elements.none? {|x| x.row == row && x.col == col}
         end
         invariant
         #PRE end
