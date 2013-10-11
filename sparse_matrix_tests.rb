@@ -1,5 +1,3 @@
-require 'simplecov'
-SimpleCov.start
 require 'test/unit'
 require './sparse_matrix'
 require './matrix_element'
