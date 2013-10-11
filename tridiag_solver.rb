@@ -2,7 +2,7 @@
 require 'test/unit/assertions.rb'
 include Test::Unit::Assertions
 
-class TriDiagSolver < AbstractSolver
+class TriDiagSolver
 	def initialize(sparseMatrix)
 	  #PRE
       begin

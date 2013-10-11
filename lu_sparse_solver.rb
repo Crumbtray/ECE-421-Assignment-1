@@ -2,7 +2,7 @@
 require 'test/unit/assertions.rb'
 include Test::Unit::Assertions
 
-class LUSparseSolver < AbstractSolver
+class LUSparseSolver
 	def initialize(sparseMatrix)
 	  #PRE
       begin
