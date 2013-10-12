@@ -10,12 +10,6 @@ class SparseMatrix
     attr_reader :elements, :rowCount, :columnCount
     
     def initialize(matrix)
-        #PRE
-        begin
-            raise ArgumentError, "SparseMatrix:: argument error -> .new() matrix argument must be a Matrix" unless matrix.kind_of?(Matrix)
-        end
-        #PRE end
-        
         @elements = Array.new
         @rowCount = matrix.row_size
         @columnCount = matrix.column_size
@@ -28,10 +22,6 @@ class SparseMatrix
         end
         
         #POST
-        begin
-            raise "SparseMatrix:: runtime error -> .new() values must be an array" unless @elements.kind_of?(Array)
-        end
-
         begin
             raise "SparseMatrix:: runtime error -> invalid size" unless @rowCount.is_a?(Integer) and @rowCount >= 0
         end
@@ -52,18 +42,6 @@ class SparseMatrix
     # @param col [Integer] The column of the new element.
     def AddNewValue(value, row, col)
         #PRE
-        begin
-            raise ArgumentError, "SparseMatrix:: argument error -> .AddNewValue() value argument must be an Integer" unless value.kind_of?(Integer)
-        end
-        
-        begin
-            raise ArgumentError, "SparseMatrix:: argument error -> .AddNewValue() col argument must be an Integer" unless col.kind_of?(Integer)
-        end
-        
-        begin
-            raise ArgumentError, "SparseMatrix:: argument error -> .AddNewValue() row argument must be an Integer" unless row.kind_of?(Integer)
-        end
-        
         begin
             raise ArgumentError, "SparseMatrix:: argument error -> AddNewValue() col argument must be within range" unless col < @columnCount
         end
@@ -97,9 +75,6 @@ class SparseMatrix
     
     def ==(sm)
         #PRE
-        begin
-            raise ArgumentError, "SparseMatrix:: argument error -> .new() matrix argument must be a Matrix" unless sm.kind_of?(SparseMatrix)
-        end
         invariant
         #PRE end
         
@@ -119,7 +94,8 @@ class SparseMatrix
     def invariant
        assert(@elements.length >= 0, "Cannot have negative elements.")
        @elements.each {|x|
-         assert(x.row < rowCount, "Invalid row for element #{x}")
+         assert(x.row < @rowCount, "Invalid row for element #{x}")
+         assert(x.col < @columnCount, "Invalid column for element #{x}")
          }
     end
     

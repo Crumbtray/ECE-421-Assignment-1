@@ -5,9 +5,6 @@ include Test::Unit::Assertions
 class LUSparseSolver
 	def initialize(sparseMatrix)
 	  #PRE
-      begin
-        raise "LUSparseSolver:: runtime error -> SparseMatrix argument must be a SparseMatrix" unless sparseMatrix.kind_of?(SparseMatrix)
-      end
 	  #PRE end
 	  
 	  #POST
@@ -16,9 +13,6 @@ class LUSparseSolver
 	
 	def self.solve()
 	  #PRE
-      begin
-        raise "LUSparseSolver:: runtime error -> b argument must be an Array" unless b.kind_of?(Array)
-      end
 	  begin
         raise "LUSparseSolver:: runtime error -> b argument must have a size that is equal to the number of rows in A" unless (b.size == A.GetRowCount())
       end
