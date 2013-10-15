@@ -43,11 +43,15 @@ class LUSparseSolver
 	
 	def lu_decomposition
 		p = get_pivot
-		tmp = p * self
-		u = Matrix.zero(row_size).to_a
-		l = Matrix.identity(row_size).to_a
-		(0 ... row_size).each do |i|
-			(0 ... row_size).each do |j|
+		converted = Matrix.zero(@matrix.rowCount).to_a;
+		@matrix.elements.each do |e|
+			converted[e.row][e.col] = e.value;
+		end
+		tmp = p * converted
+		u = Matrix.zero(@matrix.rowCount).to_a
+		l = Matrix.identity(@matrix.rowCount).to_a
+		(0 ... @matrix.rowCount).each do |i|
+			(0 ... @matrix.rowCount).each do |j|
 				if j >= i
 					# upper
 					u[i][j] = tmp[i,j] - (0 .. i-1).inject(0.0) {|sum, k| sum + u[k][j] * l[i][k]}
