@@ -23,7 +23,7 @@ class LUSparseSolver
 	  
 		m = make_matrix
 		l = Matrix::LUPDecomposition.new(m)
-		l.solve(b)
+		result = l.solve(b)
 	  #POST
 	  begin
 		raise "LUSparseSolver:: runtime error -> vector b must not be modified" unless (copyOfB == b)
@@ -37,7 +37,7 @@ class LUSparseSolver
 		#raise "LUSparseSolver:: runtime error -> solution vector x must be equal to the solution of SparseMatrix A" unless (@A*x == b)
 	  end
       #POST end
-	  result
+	  result.to_a
 	end
 	
 	def make_matrix
