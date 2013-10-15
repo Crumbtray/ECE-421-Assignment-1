@@ -47,7 +47,7 @@ class LUSparseSolver
 		@matrix.elements.each do |e|
 			converted[e.row][e.col] = e.value;
 		end
-		tmp = p * converted
+		tmp = p * Matrix[*converted]
 		u = Matrix.zero(@matrix.rowCount).to_a
 		l = Matrix.identity(@matrix.rowCount).to_a
 		(0 ... @matrix.rowCount).each do |i|
@@ -61,7 +61,7 @@ class LUSparseSolver
 				end
 			end
 		end
-    [ Matrix[*l], Matrix[*u], p ]
+		[ Matrix[*l], Matrix[*u], p ]
 	end
 	
 	def get_pivot

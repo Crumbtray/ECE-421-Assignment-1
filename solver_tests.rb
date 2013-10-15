@@ -5,7 +5,7 @@ require './tridiag_solver'
 
 class SolverTests < Test::Unit::TestCase
   def test_lu_solver_skeleton
-    m = Matrix[[0,0],[1,0]]
+    m = Matrix[[0,1],[1,0]]
     sm = SparseMatrix.new(m)
     b = [5, 3]
     luSolver = LUSparseSolver.new(sm)
