@@ -17,7 +17,7 @@ class LUSparseSolver
 	  copyOfB = b
 	  #PRE
 	  begin
-        raise "LUSparseSolver:: runtime error -> b argument must have a size that is equal to the number of rows in A" unless (b.size == @A.rowCount)
+        raise ArgumentError, "LUSparseSolver:: argument error -> b argument must have a size that is equal to the number of rows in A" unless (b.size == @A.rowCount)
       end
       #PRE end
 	  
