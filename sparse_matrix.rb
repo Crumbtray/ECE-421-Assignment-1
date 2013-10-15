@@ -101,6 +101,14 @@ class SparseMatrix
          assert(x.col < @columnCount, "Invalid column for element #{x}")
          }
     end
+	
+	def to_matrix
+		matrix = Matrix.zero(@rowCount).to_a
+		@elements.each do |e|
+			matrix[e.row][e.col] = e.value
+		end
+		matrix = Matrix[*matrix]
+	end
     
     def_delegators :@elements, :each, :<<
 end

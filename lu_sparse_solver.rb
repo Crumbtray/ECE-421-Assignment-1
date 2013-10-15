@@ -21,31 +21,18 @@ class LUSparseSolver
       end
       #PRE end
 	  
-		m = make_matrix
-		l = Matrix::LUPDecomposition.new(m)
-		result = l.solve(b)
+	  l = Matrix::LUPDecomposition.new(@A.to_matrix)
+	  result = l.solve(b)
 	  #POST
 	  begin
 		raise "LUSparseSolver:: runtime error -> vector b must not be modified" unless (copyOfB == b)
 	  end
 	  
 	  begin
-		#raise "LUSparseSolver:: runtime error -> SparseMatrix A must not be modified" unless (@copyOfA == (@A))
-	  end
-	  
-	  begin
-		#raise "LUSparseSolver:: runtime error -> solution vector x must be equal to the solution of SparseMatrix A" unless (@A*x == b)
+		raise "LUSparseSolver:: runtime error -> SparseMatrix A must not be modified" unless (@copyOfA == @A)
 	  end
       #POST end
 	  result.to_a
-	end
-	
-	def make_matrix
-		matrix = Matrix.zero(@A.rowCount).to_a
-		@A.elements.each do |e|
-			matrix[e.row][e.col] = e.value
-		end
-		matrix = Matrix[*matrix]
 	end
 	
 end
