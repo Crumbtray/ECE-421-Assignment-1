@@ -17,7 +17,12 @@ class SparseMatrixTest < Test::Unit::TestCase
     m = Array.new
     assert_raise NoMethodError do
       sm = SparseMatrix.new(m)
-    end   
+    end
+
+    a = Matrix.zero(3)
+    assert_raise ArgumentError do
+      sm = SparseMatrix.new(a)
+    end  
   end
   
   def test_add_value

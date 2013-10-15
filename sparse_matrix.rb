@@ -26,6 +26,10 @@ class SparseMatrix
         
         #POST
         begin
+            raise ArgumentError, "SparseMatrix:: argument error -> cannot have a matrix with no non-zero elements." unless !@elements.empty?
+        end
+        
+        begin
             raise "SparseMatrix:: runtime error -> invalid size" unless @rowCount.is_a?(Integer) and @rowCount >= 0
         end
         
