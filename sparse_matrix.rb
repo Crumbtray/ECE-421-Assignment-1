@@ -2,9 +2,12 @@
 require 'test/unit/assertions.rb'
 require 'matrix'
 require './matrix_element'
+require 'forwardable'
 include Test::Unit::Assertions
 
 class SparseMatrix
+    include Enumerable
+    extend Forwardable
     
     #Properties can be read, but not written to.
     attr_reader :elements, :rowCount, :columnCount
@@ -99,4 +102,5 @@ class SparseMatrix
          }
     end
     
+    def_delegators :@elements, :each, :<<
 end
