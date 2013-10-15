@@ -11,15 +11,7 @@ class LUSparseSolver
 	  #POST
       #POST end
 	end
-	
-	def self.bar
-		puts 'class method'
-	end
-  
-	def baz
-		puts 'instance method'
-	end
-  
+	  
 	def solve(b)
 	  copyOfB = b
 	  #PRE
@@ -27,7 +19,6 @@ class LUSparseSolver
         raise "LUSparseSolver:: runtime error -> b argument must have a size that is equal to the number of rows in A" unless (b.size == @A.rowCount)
       end
       #PRE end
-	  #test = Matrix[*b]
 	  matrices = lu_decomposition
 	  x = matrices[0].inverse * matrices[1].inverse
 	  temp = x.to_a
@@ -77,7 +68,6 @@ class LUSparseSolver
 	end
 	
 	def get_pivot
-		#raise ArgumentError, "must be square" unless square?
 		id = Matrix.identity(@A.rowCount).to_a
 		(0 ... @A.rowCount).each do |i|
 			found = false
