@@ -15,7 +15,7 @@ class SparseMatrixTest < Test::Unit::TestCase
     
   def test_constructor_fail
     m = Array.new
-    assert_raise ArgumentError do
+    assert_raise NoMethodError do
       sm = SparseMatrix.new(m)
     end   
   end
@@ -56,7 +56,7 @@ class SparseMatrixTest < Test::Unit::TestCase
     m = Matrix[[0,0],[0,1]]
     sm = SparseMatrix.new(m)
     sa = SparseMatrix.new(m)
-    assert_raise ArgumentError do
+    assert_raise NoMethodError do
       sm.eql? m
     end
     
