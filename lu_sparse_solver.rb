@@ -46,7 +46,7 @@ class LUSparseSolver
 	
 	def lu_decomposition
 		p = get_pivot
-		converted = Matrix.zero(@A.rowCount).to_a;
+		converted = Matrix.zero(@A.rowCount).to_a
 		@A.elements.each do |e|
 			converted[e.row][e.col] = e.value;
 		end
@@ -71,6 +71,7 @@ class LUSparseSolver
 		id = Matrix.identity(@A.rowCount).to_a
 		(0 ... @A.rowCount).each do |i|
 			found = false
+			max = 0
 			@A.elements.each do |e|
 				if ( (e.row == i) and (e.col == i))
 					found = true
@@ -79,9 +80,6 @@ class LUSparseSolver
 					max = e.value
 					break
 				end
-			end
-			if !found
-				max = 0
 			end
 			row = i
 			(i ... @A.rowCount).each do |j|
