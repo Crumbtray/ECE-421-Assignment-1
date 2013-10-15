@@ -38,10 +38,10 @@ class TriDiagSolver
         raise "TriDiagSolver:: runtime error -> vB argument must be an array" unless vB.kind_of?(Array)
     end
 	  begin
-        #raise "TriDiagSolver:: runtime error -> b argument must have a size that is equal to the number of rows in A" unless (b.size == ))
+        raise "TriDiagSolver:: runtime error -> b argument must have a size that is equal to the number of rows in A" unless (b.size == a.rowCount))
     end
     #PRE end
-	  
+	  copyOfB = vB.dup
 	  @d = vB.dup
 	  
 	  @c[0] = @c[0]/@b[0]
@@ -56,15 +56,7 @@ class TriDiagSolver
 	  
 	  #POST
 	  begin
-		#raise "TriDiagSolver:: runtime error -> vector b must not be modified" unless (copyOfB.equals(b))
-	  end
-	  
-	  begin
-		#raise "TriDiagSolver:: runtime error -> SparseMatrix A must not be modified" unless (copyOfA.equals(A))
-	  end
-	  
-	  begin
-		#raise "TriDiagSolver:: runtime error -> solution vector x must be equal to the solution of SparseMatrix A" unless (A*x == b)
+		raise "TriDiagSolver:: runtime error -> vector b must not be modified" unless (copyOfB == vB)
 	  end
     #POST end
       
