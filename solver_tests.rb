@@ -42,11 +42,11 @@ class SolverTests < Test::Unit::TestCase
     sm = SparseMatrix.new(m)
     b = [5, 3, 4]
     triSolver = TriDiagSolver.new(sm)
-	assert_raise ArgumentError do
+	  assert_raise ArgumentError do
 		answer = triSolver.solve(b)
     end
     b = [5, 3, 4, 1, 0]
-	assert_raise ArgumentError do
+	  assert_raise ArgumentError do
 		answer = triSolver.solve(b)
     end
   end
