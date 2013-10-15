@@ -16,7 +16,7 @@ class SolverTests < Test::Unit::TestCase
     m = Matrix[[1,1],[1,1]]
     sm = SparseMatrix.new(m)
     b = [5, 3]
-    luSolver = TriDiagSolver.new(sm)
-    answer = luSolver.solve(b)
+    triSolver = TriDiagSolver.new(sm)
+    answer = triSolver.solve(b)
   end
 end
