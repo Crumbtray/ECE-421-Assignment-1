@@ -4,12 +4,15 @@ include Test::Unit::Assertions
 
 class TriDiagSolver
   #Properties can be read, but not written to.
-    attr_reader :a, :b, :c
+    attr_reader :a, :b, :c, :matrixRowCount
 
 	def initialize(sparseMatrix)
 	  #PRE
 	  #PRE end
 	  
+	  # Store the Row Count of the matrix in here for checking
+	  @matrixRowCount = sparseMatrix.rowCount
+
 	  #Copy sparseMatrix to a local copy with specialized storage schema for the tridiag solver
 	  @a = Array.new(sparseMatrix.columnCount - 1){|i| 0}
 	  @b = Array.new(sparseMatrix.columnCount){|i| 0}
@@ -20,27 +23,24 @@ class TriDiagSolver
 	    if (x.row == (x.col + 1))
 	      @a[x.col] = x.value
 	    elsif (x.row == (x.col - 1))
-        @c[x.col - 1] = x.value
-      elsif (x.row == x.col)
-        @b[x.col] = x.value
-      else
-        # This is not a triangular matrix
+          @c[x.col - 1] = x.value
+        elsif (x.row == x.col)
+          @b[x.col] = x.value
+        else
+        	# This is not a triangular matrix
+        	raise ArgumentError, "TriDiagSolver:: runtime error -> matrix is not tridiagonal."
+        end
       end
-	  end
-	  
 	  #POST
-    #POST end
+      #POST end
 	end
 	
 	def solve(vB)
 	  #PRE
-	  begin
-        raise "TriDiagSolver:: runtime error -> vB argument must be an array" unless vB.kind_of?(Array)
-    end
-	  begin
-        raise "TriDiagSolver:: runtime error -> b argument must have a size that is equal to the number of rows in A" unless (b.size == a.rowCount))
-    end
-    #PRE end
+		begin
+          raise ArgumentError, "TriDiagSolver:: runtime error -> b argument must have a size that is equal to the number of rows in A" unless vB.size == @matrixRowCount
+    	end
+      #PRE end
 	  copyOfB = vB.dup
 	  @d = vB.dup
 	  
@@ -56,10 +56,10 @@ class TriDiagSolver
 	  
 	  #POST
 	  begin
-		raise "TriDiagSolver:: runtime error -> vector b must not be modified" unless (copyOfB == vB)
+		raise "TriDiagSolver:: runtime error -> vector b must not be modified" unless copyOfB == vB
 	  end
-    #POST end
+      #POST end
       
-    @d.enum_for(:each_with_index).collect { |v, i| @d[i].to_r / @b[i]}
-  end
+      @d.enum_for(:each_with_index).collect { |v, i| @d[i].to_r / @b[i]}
+    end
 end

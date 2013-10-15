@@ -50,4 +50,12 @@ class SolverTests < Test::Unit::TestCase
 		answer = triSolver.solve(b)
     end
   end
+
+  def test_tridiag_solver_with_non_tridiagonal_matrix
+    m = Matrix[[3, -0.1, -0.2], [0.1, 7, -0.3], [0.3, -0.2, 10]]
+    sm = SparseMatrix.new(m)
+    assert_raise ArgumentError do
+      triSolver = TriDiagSolver.new(sm)
+    end
+  end
 end
